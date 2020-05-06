@@ -38,9 +38,8 @@ class _RegisterViewState extends State<RegisterView> {
     // TODO register request
     Future.delayed(Duration(seconds: 10)).then((_) {
       registering = false;
-      final sessionId = "abc";
       // TODO save preferences
-      Navigator.pop(context, AccountData(login: login, sessionId: sessionId));
+      Navigator.pop(context, AccountData(login: login, sessionId: "abc"));
     });
   }
 
@@ -52,11 +51,7 @@ class _RegisterViewState extends State<RegisterView> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: Text(title),
-          content: SingleChildScrollView(
-            child: ListBody(
-              children: <Widget>[Text(content)],
-            ),
-          ),
+          content: SingleChildScrollView(child: Text(content)),
           actions: <Widget>[
             FlatButton(
               child: Text(confirmation),
@@ -97,7 +92,7 @@ class _RegisterViewState extends State<RegisterView> {
                                 textCapitalization: TextCapitalization.words,
                                 decoration: InputDecoration(
                                     labelText: "Name",
-                                    prefixIcon: Icon(Icons.person),
+                                    prefixIcon: Icon(Icons.person), // TODO change icon
                                     border: OutlineInputBorder(
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(16)))),
@@ -128,7 +123,7 @@ class _RegisterViewState extends State<RegisterView> {
                                         TextCapitalization.words,
                                     decoration: InputDecoration(
                                         labelText: "Surname",
-                                        prefixIcon: Icon(Icons.person),
+                                        prefixIcon: Icon(Icons.person), // TODO change icon
                                         border: OutlineInputBorder(
                                             borderRadius: BorderRadius.all(
                                                 Radius.circular(16)))),
@@ -213,6 +208,7 @@ class _RegisterViewState extends State<RegisterView> {
                                       child: Text('Sign me up!'),
                                       onPressed: () {
                                         if (_validate()) {
+                                          FocusScope.of(context).unfocus();
                                           _register(context);
                                         }
                                       },
